@@ -1,18 +1,16 @@
 Design Document
 
-Purpose
+1.Purpose
 The system we are designing is a client-server based application with data on the server. This will make a client skinny application so that it is easy to download and use for the user. The purpose of the system is to make it possible for a user to connect with their Spotify account and to play specific genres based on the weather and temperature the user is experiencing and how fast a user is moving.
 
-Design Outline
+2.Design Outline
 	Our application will have the client-server architecture. The system will consist of 4 components; Client, Server, Spotify, and Weather Channel. The purpose of Client is to play music on the user’s phone, to save the user’s favorite song, and to sense and display the user’s motion speed. The purpose of Server is to receive weather and temperature data from Weather Channel, to calculate the genre of music that match the user’s mood, and to request and receive songs from Spotify. For Weather Channel, the purpose is to receive the user’s location from Server and to give the current weather and temperature of the location. Spotify’s purpose is to provide a song to Server chosen from the genre the Server specified.
 
 The above picture illustrates an overview of what we will use and how they will interact with each other. Our server will do most of the heavy lifting as it will need to be able to talk to Spotify,  Weather Channel and be able to make sure the user receives music matched to their mood. The above picture shows that a client will send necessary information to the server so that the server can obtain access to the users Spotify account, the correct weather for the location the user is in, and whether the user is stationary, walking, jogging or running. In return for this information the server will send the correct music to the user. In regards to Spotify, the server will send information to be granted access when the user is setting up the account and genres so that the server may receive music. Since Weather Channel is free to use we only need to send the location which we received from the client to obtain the correct weather. 
-
 The following is a UML diagram of the system.
 
 
-
-Design Issues 
+3.Design Issues 
 Functional
 	Correctly Matching Mood: There are different ways to understand what kind of mood a user would be in and they are: asking the user what they feel like, using outside inputs, estimating a user’s mood based on their previous history, and what time of day it is. For this project we chose to use the outside inputs of weather, temperature and movement. We decided that we wanted to be able to calculate their mood instead of having them decide as we thought that this would be different. The amount of time and database requirements for estimating what the user would want are more than the scope of this project. The reason we decided not to add the time component was that by doing so we would assume all people have the same schedule. i.e. everyone wakes up at a certain time and goes to bed at a certain time. Since this is unrealistic we did not add it. 
 
@@ -23,15 +21,7 @@ Non-Functional
 
 
 
-
-
-
-
-
-
-
-
-Design Details
+4.Design Details
 
 	The system consists of 6 classes; Weather/Temperature, Movement, Spotify, server, Music Function, and User. The system will send most of its data or requirements to the server first, and all the calculation and storage will be done within the server.
 When creating an account, User will send information needed to create a new account to the server, and the server will create an account. If the user has a Spotify account he or she would like to be connected to, the information needed to login to a Spotify account will be sent to the server, and will be verified through Spotify.
@@ -39,57 +29,16 @@ When playing a song, Weather/Temperature will get the weather and temperature in
 User will only be controlling the song(such as playing a song, pausing it, and adding it to favorite list), view their favorite list, while all the other functions dealing with data will be handled in the server. 
 
 Creating A New User 
-
-
 Established User Logging In
-
-
-
-
-
-
-
-
-
-
-
-
-
 A User Adding A Song to Favorites
-
-
 A User Logging Out
-
-
 A User Changing Password
-
-
-
-
-
-
-
-
-
 A User Forget Password
-
-
 A User Plays Music
 
-
 	The following diagram is the state diagram.The flow of a new user would be to create a new account where the system would make sure that their Spotify username and password are correct. Next they would be directed to arrange the pre-existing genres in the order they would prefer. Once that is done they will be redirected to the login page as they are now a registered user and can login. Any users will be directed to the music page once they login. This will play music based on their calculated mood. From the music you can go to either the favorite page or to setting which directs you all of the other things to do. If logout is clicked on the user will be redirected to the login screen from which they can login again.
-
-
 The login screen
-
-
-
 What would happen when clicking on the settings if the favorites page is on.
-
 The favorites page (currently blank)
-
 The music page (where you would be able to see the music playing)
-
-
 When the music tab is on they may also click on the settings.
-
