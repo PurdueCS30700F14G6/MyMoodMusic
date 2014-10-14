@@ -1,0 +1,44 @@
+Design Document
+
+1.Purpose
+The system we are designing is a client-server based application with data on the server. This will make a client skinny application so that it is easy to download and use for the user. The purpose of the system is to make it possible for a user to connect with their Spotify account and to play specific genres based on the weather and temperature the user is experiencing and how fast a user is moving.
+
+2.Design Outline
+	Our application will have the client-server architecture. The system will consist of 4 components; Client, Server, Spotify, and Weather Channel. The purpose of Client is to play music on the user’s phone, to save the user’s favorite song, and to sense and display the user’s motion speed. The purpose of Server is to receive weather and temperature data from Weather Channel, to calculate the genre of music that match the user’s mood, and to request and receive songs from Spotify. For Weather Channel, the purpose is to receive the user’s location from Server and to give the current weather and temperature of the location. Spotify’s purpose is to provide a song to Server chosen from the genre the Server specified.
+
+The above picture illustrates an overview of what we will use and how they will interact with each other. Our server will do most of the heavy lifting as it will need to be able to talk to Spotify,  Weather Channel and be able to make sure the user receives music matched to their mood. The above picture shows that a client will send necessary information to the server so that the server can obtain access to the users Spotify account, the correct weather for the location the user is in, and whether the user is stationary, walking, jogging or running. In return for this information the server will send the correct music to the user. In regards to Spotify, the server will send information to be granted access when the user is setting up the account and genres so that the server may receive music. Since Weather Channel is free to use we only need to send the location which we received from the client to obtain the correct weather. 
+The following is a UML diagram of the system.
+
+
+3.Design Issues 
+Functional
+	Correctly Matching Mood: There are different ways to understand what kind of mood a user would be in and they are: asking the user what they feel like, using outside inputs, estimating a user’s mood based on their previous history, and what time of day it is. For this project we chose to use the outside inputs of weather, temperature and movement. We decided that we wanted to be able to calculate their mood instead of having them decide as we thought that this would be different. The amount of time and database requirements for estimating what the user would want are more than the scope of this project. The reason we decided not to add the time component was that by doing so we would assume all people have the same schedule. i.e. everyone wakes up at a certain time and goes to bed at a certain time. Since this is unrealistic we did not add it. 
+
+Calculating Correct Mood at the Right Time: One thing that will be important to our application will be the timing of when a user’s mood is recalculated and how often it will be updated. The reasons for this is that in the length of a song a user can potentially change their movement - stationary, walking, jogging, or running - several times. This being said we decided that the system would only recalculate their mood within 3 seconds of the current song finishing. A separate option would be to enqueue an amount of songs and wait until the queue of songs finished before recalculating their mood. The problem with this is that it would not provide change fast enough for a user, because as was stated earlier the user may change their movement anytime. If the system calculated all the time to make sure that the users are listening to the correct songs the server may become overloaded - if the system was supporting several users - and not be able to function correctly. If the system recalculated all the time then it would potentially have to skip a song and change it to another song quite often. This would not work with Spotify as they only allow a user to skip six songs in one hour, so the system cannot enable this practice. The reason that the users movement was mentioned so much in this part is that though weather and temperature change the user’s movement is potentially the most volatile of all three, because the system would be able to see the weather forecast for the entire day based on their location with one check to the weather API.
+	
+Non-Functional
+	Connecting With Music: The system will need to be able to have the user connect to a pre-existing music source. We decided that there are already plenty of applications that allow access to music which are better than what we could accomplish with the amount of time and resources we have. There are many different free systems to listen to music Spotify, Groveshark, Pandora, etc. There are positives with many, however, we decided to go with Spotify. While there was a security breach earlier this year many people are still using Spotify and the problem of hacking could potentially be a problem with any application which stores credit card information. The large pros that outweigh the previous con is that the Spotify api is free, genres are well defined, and it has more music than other providers. The main reason, however, that we decided to go with Spotify is name recognition, more and more people are using Spotify than other providers, so when making an application it is a good idea to make something for something else that many people are already using. This last part really does overcome any cons that using Spotify may have.
+
+
+
+4.Design Details
+
+	The system consists of 6 classes; Weather/Temperature, Movement, Spotify, server, Music Function, and User. The system will send most of its data or requirements to the server first, and all the calculation and storage will be done within the server.
+When creating an account, User will send information needed to create a new account to the server, and the server will create an account. If the user has a Spotify account he or she would like to be connected to, the information needed to login to a Spotify account will be sent to the server, and will be verified through Spotify.
+When playing a song, Weather/Temperature will get the weather and temperature information of the area the user is currently at through API, and send the data to the server. Movement will first receive the user’s current coordinates, and then calculate and send the speed to the server. Server will calculate the mood that best matches the user’s current situation from data received from Weather/Temperature and Movement. After that the server will specify what genre of music to play and get the song through Spotify API. The song received will then be sent to User, in order to play the song on the user’s phone. 
+User will only be controlling the song(such as playing a song, pausing it, and adding it to favorite list), view their favorite list, while all the other functions dealing with data will be handled in the server. 
+
+Creating A New User 
+Established User Logging In
+A User Adding A Song to Favorites
+A User Logging Out
+A User Changing Password
+A User Forget Password
+A User Plays Music
+
+	The following diagram is the state diagram.The flow of a new user would be to create a new account where the system would make sure that their Spotify username and password are correct. Next they would be directed to arrange the pre-existing genres in the order they would prefer. Once that is done they will be redirected to the login page as they are now a registered user and can login. Any users will be directed to the music page once they login. This will play music based on their calculated mood. From the music you can go to either the favorite page or to setting which directs you all of the other things to do. If logout is clicked on the user will be redirected to the login screen from which they can login again.
+The login screen
+What would happen when clicking on the settings if the favorites page is on.
+The favorites page (currently blank)
+The music page (where you would be able to see the music playing)
+When the music tab is on they may also click on the settings.

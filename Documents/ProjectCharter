@@ -1,0 +1,59 @@
+Project Charter
+
+1. Sometimes it can be difficult to find music to fit your daily activity incorporating your 
+surroundings. This application will strive to give a new way to listen to music depending 
+on weather, location, and a user’s movement. 
+
+2.
+
+* Music playing based on weather / temperature
+
+* Music to change based on speed of user (increased or decreased bpm)
+
+* Music based on location (state)
+
+* Online / OfflineBlocked genres
+
+* Pause, volume, Skip button
+
+* User profiles
+
+* Liked playlist
+
+* Visual representation of songs
+
+* High / low intensity button
+
+* User interface
+
+* Google Map Integration
+
+* Display weather, speed, and temperature
+
+* Calories in workout mode
+
+* Weight, height, and age for workout 
+
+* Goal setting ability
+
+* Motivational music when near goal
+
+* Countdown clock for low intensity music
+
+* Sprint/walking interval music
+
+
+3. Users – music lovers, gym goers, nature enthusiast
+Software developers – team 6
+Development manager – TA (Project coordinator)
+
+
+4. The app will use weather information to select genres. It will be able to change songs 
+based on how fast someone is moving and where they are the located. The user will 
+have a profile which will store his or her preferences. The platform will be Android. We 
+will use C# for backend, Java for frontend, Spotify, Pandora, Weather.com, and Google 
+Maps APIs. 
+
+5. Team 6, Risa Matsuoka, Jennifer Bunge, Kartik Sawant, Struan McCallum
+
+6. No
