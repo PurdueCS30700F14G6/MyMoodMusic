@@ -12,12 +12,16 @@
     <div class="container">
       <form class="form-signin" role="form">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+        <input type="email" class="form-control" placeholder="Email address" autofocus>
+        <input type="password" class="form-control" placeholder="Password">
+        <table border="0" width="100%">
+        <th><label class="checkbox">
+          <input type="checkbox" value="remember-me">Remember me
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </th>
+          <th><div align="right"><a href="forgotpassword.html"class="btn btn-danger btn-sm" role="button">Forgot Password</a></div></th>
+        </table>
+        <br><button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <a href="newmember.html" class="btn btn-primary btn-lg btn-block" role="button">New Member</a>
       </form>
     </div>
